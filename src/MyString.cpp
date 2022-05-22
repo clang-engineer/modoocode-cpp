@@ -121,7 +121,13 @@ MyString& MyString::insert(int loc, const MyString& str){
     };
 
     if(string_length + str.string_length > memory_capacity) {
-        memory_capacity = string_length + str.string_length;
+
+        if(memory_capacity * 2 > string_length + str.string_length) {
+            memory_capacity *= 2;
+        } else {
+            memory_capacity = string_length + str.string_length;
+        };
+
         char* prev_string_content = string_content;
         string_content = new char[memory_capacity];
 
