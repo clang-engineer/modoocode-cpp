@@ -5,7 +5,7 @@ class MyString{
     private:
         char* string_content;
         int string_length;
-
+        int memory_capacity;
 
     public:
         MyString(char c);
@@ -14,6 +14,9 @@ class MyString{
         ~MyString();
 
         int length() const;
+        int capacity() const;
+        void reserve(int size);
+
         void print() const;
         void println() const;
         MyString& assign(const MyString& str);
@@ -23,10 +26,13 @@ class MyString{
 MyString::MyString(char c){
     string_content = new char[1];
     string_content[0] = c;
+    string_length = 1;
+    memory_capacity = 1;
 };
 
 MyString::MyString(const char* str){
     string_length = strlen(str);
+    memory_capacity = string_length;
     string_content = new char[string_length];
 
     for (int i = 0; i < string_length; i++) {
@@ -36,6 +42,7 @@ MyString::MyString(const char* str){
 
 MyString::MyString(const MyString& str){
     string_length = str.string_length;
+    memory_capacity = str.string_length;
     string_content = new char[string_length];
 
     for(int i=0; i<string_length; i++){
@@ -68,6 +75,7 @@ MyString& MyString::assign(const MyString& str) {
     if(str.string_length > string_length){
         delete[] string_content;
         string_content = new char[str.string_length];
+        memory_capacity = str.string_length;
     };
 
     for (int i=0; i<str.string_length; i++){
@@ -95,15 +103,20 @@ MyString& MyString::assign(const char* str) {
     return *this;
 };
 
+int MyString::capacity() const{
+    return memory_capacity;
+};
+
+void MyString::reserve(int size) {
+    memory_capacity = size;
+};
 
 int main(){
     MyString str1("very very long string");
-    str1.println();
+    str1.reserve(30);
 
-    str1.assign("short string");
-    str1.println();
-
-    str1.assign("very long string");
+    std::cout << "capacity: " << str1.capacity() << std::endl;
+    std::cout << "String length: " << str1.length() << std::endl;
     str1.println();
 };
 
