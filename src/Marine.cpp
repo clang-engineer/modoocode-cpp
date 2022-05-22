@@ -16,7 +16,7 @@ class Marine {
         Marine(int x, int y);
         Marine(int x, int y, int default_damage);
 
-        int attack();
+        int attack() const;
         Marine& be_attacked(int damage_earn);
         void move(int x, int y);
 
@@ -29,7 +29,6 @@ class Marine {
 };
 
 int Marine::total_marine_num = 0;
-
 void Marine::show_total_marine(){
     std::cout << "total marin num: " << total_marine_num << std::endl;
 };
@@ -49,10 +48,9 @@ Marine::Marine(int x, int y, int default_damage) : coord_x(x),coord_y(y), hp(50)
 void Marine::move(int x, int y) {
     coord_x = x;
     coord_y = y;
-    total_marine_num +=1;
 };
 
-int Marine::attack(){
+int Marine::attack() const {
     return default_damage;
 };
 
