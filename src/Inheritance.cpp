@@ -2,29 +2,30 @@
 #include <string>
 
 class Base {
-    private:
-        std::string s;
+    protected:
+        std::string parent_string;
     public:
-        Base(): s("Base"){
+        Base(): parent_string("Base"){
             std::cout << "Base Class init" << std::endl;
         }
 
         void what() {
-            std::cout << s <<std::endl;
+            std::cout << parent_string <<std::endl;
         }
 };
 
 class Drived: public Base {
     private:
-        std::string s;
+        std::string child_string;
     public:
-        Drived(): Base(), s("drived") {
+        Drived(): Base(), child_string("drived") {
             std::cout << "Drived Class init" << std::endl;
-            what();
+            parent_string = "change by child";
         }
 
         void what() {
-            std::cout << s << std::endl;
+            std::cout << child_string << std::endl;
+            std::cout << parent_string << std::endl;
         }
 };
 
@@ -34,6 +35,8 @@ int main() {
 
     std::cout << "== Init Drived Class==" << std::endl;
     Drived p2;
+
+    p2.what();
 
     return 0;
 }
