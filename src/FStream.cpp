@@ -4,21 +4,16 @@
 
 int main() {
     std::ifstream in("test.txt");
-    std::string s;
+    char buf[100];
 
-    if (in.is_open()) {
-        in.seekg(0, std::ios::end);
-        int size = in.tellg();
 
-        s.resize(size);
-
-        in.seekg(0, std::ios::beg);
-
-        in.read(&s[0], size);
-        std::cout << "input string is: " << s << std::endl;
-    } else {
-        std::cout << "can not find file" << s << std::endl;
+    if(!in.is_open()) {
+        std::cout << "can not find file" << std::endl;
     }
 
+    while (in) {
+        in.getline(buf, 100);
+        std::cout << buf << std::endl;
+    }
     return 0;
 }
