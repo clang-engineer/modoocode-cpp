@@ -29,7 +29,6 @@ class Employee {
         int calculate_pay() {
             return 200 + rank * 50;
         }
-
 };
 
 class Manager: public Employee {
@@ -81,11 +80,11 @@ class EmployeeList {
 
         void print_employee_info() {
             int total_pay = 0;
-            for (int i=0; i<current_employee; i++) {
+            for (int i = 0; i < current_employee; i++) {
                 employee_list[i]->print_info();
                 total_pay += employee_list[i]->calculate_pay();
             }
-            std::cout << "total paymenu: " << total_pay << std::endl;
+            std::cout << "total payment: " << total_pay << std::endl;
         }
 
         ~EmployeeList() {
