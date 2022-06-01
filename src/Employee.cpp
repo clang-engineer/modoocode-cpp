@@ -22,13 +22,13 @@ class Employee {
 
         Employee() {}
 
-        void print_info() {
+        virtual int calculate_pay() {
+            return 200 + rank * 50;
+        }
+        virtual void print_info() {
             std::cout << name << " (" << position << ", " << age << ") ==> " <<  calculate_pay() << std::endl;
         }
 
-        int calculate_pay() {
-            return 200 + rank * 50;
-        }
 };
 
 class Manager: public Employee {
@@ -46,12 +46,12 @@ class Manager: public Employee {
 
         Manager(): Employee() {}
 
-        int calculate_pay() {
+        int calculate_pay() override {
             return 200 + rank * 50 + 5 * year_of_service;
         }
 
-        void print_info() {
-            std::cout << name << " (" << position << ", " << age << "," << year_of_service << "year work) ==> " <<  calculate_pay() << std::endl;
+        void print_info() override {
+            std::cout << name << " (" << position << ", " << age << ", " << year_of_service << "year work) ==> " <<  calculate_pay() << std::endl;
         }
 
 };
