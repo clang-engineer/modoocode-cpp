@@ -32,8 +32,8 @@ int main() {
     Drived c;
 
     std::cout << "== pointer viersion ==" << std::endl;
-    Base* p_p = &c;
-    Drived* p_c  = p_p;
+    Base* p_p = &p;
+    Drived* p_c  = static_cast<Drived*>(p_p);
     p_c->what();
 
     return 0;
