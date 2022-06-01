@@ -4,16 +4,15 @@
 
 int main() {
     std::ifstream in("test.txt");
-    char buf[100];
-
 
     if(!in.is_open()) {
         std::cout << "can not find file" << std::endl;
     }
 
+    std::string s;
     while (in) {
-        in.getline(buf, 100);
-        std::cout << buf << std::endl;
+        getline(in, s);
+        std::cout << s << std::endl;
     }
     return 0;
 }
