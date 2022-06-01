@@ -2,17 +2,31 @@
 #include <iostream>
 #include <string>
 
-int main() {
-    std::ifstream in("test.txt");
+class Human {
+    private: 
+        std::string name;
+        int age;
 
-    if(!in.is_open()) {
-        std::cout << "can not find file" << std::endl;
-    }
+    public:
+        Human(const std::string& name, int age): name(name), age(age) {}
+        std::string get_info() {
+            return "Name: " + name + "/ Age: " + std::to_string(age);
+        }
 
-    std::string s;
-    while (in) {
-        getline(in, s);
-        std::cout << s << std::endl;
-    }
+        friend std::ofstream& operator<<(std::ofstream& o, Human& h);
+};
+
+std::ofstream& operator<<(std::ofstream& os, Human& h) {
+    os << h.get_info();
+    return os;
+};
+
+int main() { 
+
+    std::ofstream out("test.txt");
+
+    Human h("lee", 60);
+    out << h << std::endl;
+
     return 0;
 }
