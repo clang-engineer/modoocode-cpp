@@ -66,6 +66,28 @@ void bubble_sort(Cont& cont) {
     }
 }
 
+template <typename Cont, typename Comp>
+void bubble_sort(Cont& cont, Comp& comp) {
+    for (int i = 0; i < cont.size(); i++) {
+        for (int j = i + 1; j < cont.size(); j++) {
+            if (!comp(cont[i], cont[j])) {
+                cont.swap(i, j);
+            }
+        }
+    }
+}
+
+struct Comp1 {
+    bool operator()(int a, int b) {
+        return a > b;
+    }
+};
+
+struct Comp2 {
+    bool operator()(int a, int b) {
+        return a < b;
+    }
+};
 
 int main() {
     Vector<int> int_vec;
@@ -81,9 +103,21 @@ int main() {
     for (int i = 0; i < int_vec.size(); i++) {
         std::cout << int_vec[i] << " ";
     }
+    std::cout << std::endl;
 
-    std::cout << std::endl << "==after sort==" << std::endl;
-    bubble_sort(int_vec);
+    Comp1 comp1;
+    bubble_sort(int_vec, comp1);
+
+    std::cout << std::endl << "==after desc sort==" << std::endl;
+    for (int i = 0; i < int_vec.size(); i++) {
+        std::cout << int_vec[i] << " ";
+    }
+    std::cout << std::endl;
+
+    Comp2 comp2;
+    bubble_sort(int_vec, comp2);
+
+    std::cout << std::endl << "==after asc sort==" << std::endl;
     for (int i = 0; i < int_vec.size(); i++) {
         std::cout << int_vec[i] << " ";
     }
