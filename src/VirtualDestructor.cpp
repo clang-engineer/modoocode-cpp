@@ -5,7 +5,7 @@ class Parent {
         Parent() {
             std::cout << "Parent Constuctor" << std::endl;
         }
-        ~Parent() {
+        virtual ~Parent() {
             std::cout << "Parent Denstuctor" << std::endl;
         }
 };
