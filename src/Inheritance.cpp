@@ -32,8 +32,9 @@ int main() {
     Drived c;
 
     std::cout << "== pointer viersion ==" << std::endl;
-    Drived* p_p  = &p;
-    p_p->what();
+    Base* p_p = &c;
+    Drived* p_c  = p_p;
+    p_c->what();
 
     return 0;
 }
