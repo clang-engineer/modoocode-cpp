@@ -14,7 +14,7 @@ class Base {
         }
 };
 
-class Drived: private Base {
+class Drived: public Base {
     private:
         std::string s;
     public:
@@ -28,15 +28,12 @@ class Drived: private Base {
 };
 
 int main() {
-    std::cout << "Base class init" << std::endl;
     Base p;
-
-    p.what();
-
-    std::cout << "Drived class init" << std::endl;
     Drived c;
 
-    c.what();
+    std::cout << "== pointer viersion ==" << std::endl;
+    Base* p_c  = &c;
+    p_c->what();
 
     return 0;
 }
