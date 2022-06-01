@@ -3,35 +3,40 @@
 
 class Base {
     public:
-        std::string parent_string;
+        std::string s;
 
-        Base(): parent_string("Base"){
-            std::cout << "Base Class init" << std::endl;
+        Base(): s("Base"){
+            std::cout << "Base Class Constructor" << std::endl;
         }
 
         void what() {
-            std::cout << parent_string <<std::endl;
+            std::cout << s <<std::endl;
         }
 };
 
 class Drived: private Base {
     private:
-        std::string child_string;
+        std::string s;
     public:
-        Drived(): Base(), child_string("drived") {
-            std::cout << "Drived Class init" << std::endl;
+        Drived(): Base(), s("drived") {
+            std::cout << "Drived Class Constructor" << std::endl;
         }
 
         void what() {
-            std::cout << child_string << std::endl;
+            std::cout << s << std::endl;
         }
 };
 
 int main() {
+    std::cout << "Base class init" << std::endl;
     Base p;
 
-    std::cout << p.parent_string << std::endl;
+    p.what();
 
+    std::cout << "Drived class init" << std::endl;
     Drived c;
+
+    c.what();
+
     return 0;
 }
