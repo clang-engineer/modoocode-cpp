@@ -9,8 +9,8 @@ class Base {
             std::cout << "Base Class Constructor" << std::endl;
         }
 
-        void what() {
-            std::cout << s <<std::endl;
+        virtual void what() {
+            std::cout << s << std::endl;
         }
 };
 
@@ -22,7 +22,7 @@ class Drived: public Base {
             std::cout << "Drived Class Constructor" << std::endl;
         }
 
-        void what() {
+        void what() override {
             std::cout << s << std::endl;
         }
 };
@@ -32,8 +32,14 @@ int main() {
     Drived c;
 
     std::cout << "== pointer viersion ==" << std::endl;
+    std::cout << "Base class init" << std::endl;
     Base* p_p = &p;
-    Drived* p_c  = static_cast<Drived*>(p_p);
+    Base* p_c = &c;
+
+    std::cout << "== no casting ==" << std::endl;
+    p_p->what();
+
+    std::cout << "== up casting ==" << std::endl;
     p_c->what();
 
     return 0;
