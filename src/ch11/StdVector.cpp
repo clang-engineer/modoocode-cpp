@@ -9,7 +9,7 @@ int main() {
     vec.push_back(40);
     vec.push_back(50);
 
-    for (std::vector<int>::size_type i = 0; i < vec.size(); i++) {
-        std::cout << "vec's " << i + 1 << " is " << vec[i] << std::endl;
+    for (std::vector<int>::iterator itr = vec.begin(); itr != vec.end(); ++itr) {
+        std::cout << "vec is " << *itr << std::endl;
     }
 }
