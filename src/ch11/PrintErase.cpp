@@ -8,6 +8,14 @@ void print_vec(std::vector<T>& vec) {
     }
 }
 
+template <typename T>
+void print_vector_range_based(std::vector<T>* vec) {
+    for (const auto& elem : *vec) {
+        std::cout << elem << std::endl;
+     }
+    
+}
+
 int main() {
     std::vector<int> vec;
 
@@ -18,7 +26,7 @@ int main() {
     vec.push_back(50);
 
     std::cout << "initial vector is" << std::endl;
-    print_vec(vec);
+    print_vector_range_based(&vec);
 
     std::vector<int>::reverse_iterator r_iter = vec.rbegin();
     for (; r_iter != vec.rend(); r_iter++) {
