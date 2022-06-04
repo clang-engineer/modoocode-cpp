@@ -1,17 +1,17 @@
 #include <iostream>
 
-template <typename T>
-void print(T arg) {
-    std::cout << arg << std::endl;
+template <typename String>
+std::string StrCat(const String& s) {
+    return std::string(s);
 }
 
-template <typename T, typename... Types>
-void print(T arg, Types... args) {
-    std::cout << arg << std::endl;
-    print(args...);
+template <typename String, typename...Strings>
+std::string StrCat(const String& s, Strings... strs) {
+    return std::string(s) + StrCat(strs...);
 }
 
 int main() {
-    print(1, 3.1, "abc");
-    print(1, 2, 3, 4, 5);
+    std::cout << StrCat(std::string("this"), " ", "is", " ", 
+            "a", " ", "sentence") << std::endl;
+    return 0;
 }
