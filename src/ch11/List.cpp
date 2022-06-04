@@ -19,5 +19,22 @@ int main() {
     std::cout << "intial list" << std::endl;
     print(list);
 
+    std::cout << "insert elem to list" << std::endl;
+    for (std::list<int>::iterator itr = list.begin(); itr != list.end(); ++itr) {
+        if (*itr == 20) {
+            list.insert(itr, 21);
+        }
+    }
+    print(list);
+
+    std::cout << "erase elem to list" << std::endl;
+    for (std::list<int>::iterator itr = list.begin(); itr != list.end(); ++itr) {
+        if (*itr == 20) {
+            list.erase(itr);
+            break;
+        }
+    }
+    print(list);
+
     return 0;
 }
