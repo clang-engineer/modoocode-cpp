@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
 
-void print_vec(std::vector<int>& vec) {
-    for (std::vector<int>::iterator itr = vec.begin(); itr != vec.end(); itr++) {
+template <typename T>
+void print_vec(std::vector<T>& vec) {
+    for (typename std::vector<T>::iterator itr = vec.begin(); itr != vec.end(); itr++) {
         std::cout << "vec: " << *itr << std::endl;
     }
 }
@@ -19,15 +20,12 @@ int main() {
     std::cout << "initial vector is" << std::endl;
     print_vec(vec);
 
-    std::vector<int>::iterator itr = vec.begin();
-
-    for (; itr != vec.end(); ++itr) {
-        if (*itr == 20) {
-            vec.erase(itr);
-        }
-    }
+    std::vector<int>::iterator itr = vec.begin() + 2;
+    *itr = 500;
+    print_vec(vec);
 
 
-    std::cout << "after erase element is" << std::endl;
+    std::vector<int>::const_iterator citr = vec.begin() + 2;
+    *citr = 300;
     print_vec(vec);
 }
