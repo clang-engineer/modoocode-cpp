@@ -20,12 +20,8 @@ int main() {
     std::cout << "initial vector is" << std::endl;
     print_vec(vec);
 
-    std::vector<int>::iterator itr = vec.begin() + 2;
-    *itr = 500;
-    print_vec(vec);
-
-
-    std::vector<int>::const_iterator citr = vec.begin() + 2;
-    *citr = 300;
-    print_vec(vec);
+    std::vector<int>::reverse_iterator r_iter = vec.rbegin();
+    for (; r_iter != vec.rend(); r_iter++) {
+        std::cout << *r_iter << std::endl;
+    }
 }
