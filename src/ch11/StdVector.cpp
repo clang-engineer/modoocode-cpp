@@ -12,4 +12,8 @@ int main() {
     for (std::vector<int>::iterator itr = vec.begin(); itr != vec.end(); ++itr) {
         std::cout << "vec is " << *itr << std::endl;
     }
+
+    std::vector<int>::iterator itr = vec.begin() + 2;
+
+    std::cout << "3 of vector is " << *itr << std::endl;
 }
