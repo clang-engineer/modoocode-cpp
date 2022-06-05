@@ -13,6 +13,17 @@ void print_map(std::map<K, V>* map) {
 
 }
 
+template <typename K, typename V>
+void search_and_print(std::map<K, V>* map, K key) {
+    typename std::map<K, V>::iterator itr = map->find(key);
+
+    if (itr != map->end()) {
+        std::cout << key << "--->" << itr->second << std::endl;
+    } else {
+        std::cout << key << " is not in map" << std::endl;
+    }
+}
+
 int main() {
     std::map<std::string, double> pitcher_list;
 
@@ -29,4 +40,7 @@ int main() {
     pitcher_list["park3"] = 1.6;
 
     print_map(&pitcher_list);
+
+    search_and_print(&pitcher_list, std::string("kim3"));
+    search_and_print(&pitcher_list, std::string("kim5"));
 }
