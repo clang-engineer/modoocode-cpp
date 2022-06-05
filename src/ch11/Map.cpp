@@ -7,6 +7,10 @@ void print_map(std::map<K, V>* map) {
         std::cout << itr->first << ", " << itr->second << std::endl;
     }
 
+    for (const std::pair<K, V> elem : *map) {
+        std::cout << elem.first << ", " << elem.second << std::endl;
+    }
+
 }
 
 int main() {
