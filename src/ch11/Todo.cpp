@@ -1,8 +1,8 @@
 #include <iostream>
 #include <set>
 
-template <typename T>
-void print_set(std::set<T>& todos) {
+template <typename T, typename C>
+void print_set(std::set<T, C>& todos) {
     for (const auto& elem : todos) {
         std::cout << elem << std::endl;
     }
@@ -14,14 +14,20 @@ class Todo {
         std::string job_desc;
     public:
         Todo(int priority, std::string job_desc): priority(priority), job_desc(job_desc) {}
-        bool operator<(const Todo todo) const {
-            if (priority == todo.priority) {
-                return job_desc < todo.job_desc;
-            }
-            return priority > todo.priority;
-        }
+
+        friend struct TodoComp;
 
         friend std::ostream& operator<<(std::ostream& os, const Todo& todo);
+};
+
+struct TodoComp {
+    bool operator()(const Todo& t1, const Todo& t2) const {
+        if (t1.priority == t2.priority) {
+            return t1.job_desc < t2.job_desc;
+        }
+
+        return t1.priority > t2.priority;
+    }
 };
 
 std::ostream& operator<<(std::ostream& os, const Todo& todo) {
@@ -30,7 +36,7 @@ std::ostream& operator<<(std::ostream& os, const Todo& todo) {
 }
 
 int main() {
-    std::set<Todo> todos;
+    std::set<Todo, TodoComp> todos;
 
     std::cout << "=== init todos ===" << std::endl;
     todos.insert(Todo(1, "todo 1"));
