@@ -12,8 +12,19 @@ void print(Iter begin, Iter end) {
 }
 
 struct is_odd {
+    int num_delete;
+
+    is_odd(): num_delete(0) {}
+
     bool operator() (const int& i) {
-        return i % 2 == 0;
+        if (num_delete >= 2) return false;
+
+        if (i % 2 == 1) {
+            num_delete++;
+            return true;
+        }
+
+        return false;
     }
 };
 
