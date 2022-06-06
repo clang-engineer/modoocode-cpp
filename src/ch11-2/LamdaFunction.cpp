@@ -26,6 +26,17 @@ int main() {
     print(vec.begin(), vec.end());
 
     std::cout << "after sort" << std::endl;
-    vec.erase(std::remove_if(vec.begin(), vec.end(), [](int i) -> bool {return i%2 == 1;}), vec.end());
+    int num_erased = 0;
+    vec.erase(std::remove_if(vec.begin(), vec.end(), 
+                [&num_erased](int i) -> bool {
+                if (num_erased >= 2) {
+                return false;
+                } else if (i % 2 == 1) {
+                num_erased++;
+                return true;
+                }
+                return false;
+                }),
+            vec.end());
     print(vec.begin(), vec.end());
 }
