@@ -17,6 +17,10 @@ struct is_odd {
     }
 };
 
+bool odd(const int& i) {
+    return i % 2 == 0;
+}
+
 int main() {
     std::vector<int> vec;
 
@@ -32,5 +36,6 @@ int main() {
 
     std::cout << "after remove" << std::endl;
     vec.erase(std::remove_if(vec.begin(), vec.end(), is_odd()), vec.end());
+//  vec.erase(std::remove_if(vec.begin(), vec.end(), odd), vec.end());
     print(vec.begin(), vec.end());
 }
