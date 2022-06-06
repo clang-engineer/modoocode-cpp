@@ -12,15 +12,15 @@ void print(Iter begin, Iter end) {
 }
 
 struct is_odd {
-    int num_delete;
+    int* num_delete;
 
-    is_odd(): num_delete(0) {}
+    is_odd(int* num_delete): num_delete(num_delete) {}
 
     bool operator() (const int& i) {
-        if (num_delete >= 2) return false;
+        if (*num_delete >= 2) return false;
 
         if (i % 2 == 1) {
-            num_delete++;
+            (*num_delete)++;
             return true;
         }
 
@@ -46,7 +46,8 @@ int main() {
     print(vec.begin(), vec.end());
 
     std::cout << "after remove" << std::endl;
-    vec.erase(std::remove_if(vec.begin(), vec.end(), is_odd()), vec.end());
+    int num_delete = 0;
+    vec.erase(std::remove_if(vec.begin(), vec.end(), is_odd(&num_delete)), vec.end());
 //  vec.erase(std::remove_if(vec.begin(), vec.end(), odd), vec.end());
     print(vec.begin(), vec.end());
 }
