@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <vector>
 
 class MyString {
     private:
@@ -13,6 +14,8 @@ class MyString {
         MyString(const char* str);
 
         MyString(const MyString& str);
+
+        MyString(MyString&& str) noexcept;
 
         void reserve(int size);
 
@@ -56,6 +59,15 @@ MyString::MyString(const MyString&  str) {
     for (int i = 0; i < string_length; i++) {
         string_content[i] = str.string_content[i];
     }
+}
+
+MyString::MyString(MyString&& str) noexcept {
+    std::cout << "Constructor MyString(const MyString&& str) is called" << std::endl;
+    string_length = str.string_length;
+    string_content =  str.string_content;
+    memory_capacity = str.memory_capacity;
+
+    str.string_content = nullptr;
 }
 
 MyString::~MyString() {
@@ -107,11 +119,16 @@ void MyString::println() {
 }
 
 int main() {
-    MyString str1("abc");
-    MyString str2("def");
+    MyString s("abc");
+    std::vector<MyString> vec;
+    vec.resize(0);
 
-    std::cout << "=========after concat=======" << std::endl;
+    std::cout << "first elem" << std::endl;
+    vec.push_back(s);
 
-    MyString str3 = str1 + str2;
-    str3.println();
+    std::cout << "second elem" << std::endl;
+    vec.push_back(s);
+
+    std::cout << "third elem" << std::endl;
+    vec.push_back(s);
 }
