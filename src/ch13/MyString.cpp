@@ -1,4 +1,4 @@
-#include  <iostream>
+#include <iostream>
 #include <cstring>
 
 class MyString {
@@ -11,6 +11,8 @@ class MyString {
         MyString();
 
         MyString(const char *str);
+
+        MyString(MyString &&str) noexcept;
 
         MyString(const MyString &str);
 
@@ -45,6 +47,15 @@ MyString::MyString(const char *str) {
     }
 }
 
+MyString::MyString(MyString &&str) noexcept {
+    std::cout << "Constructor - MyString(MyString &&str)" << std::endl;
+    string_length = str.string_length;
+    memory_capacity = str.memory_capacity;
+    string_content = str.string_content;
+
+    str.string_content = nullptr;
+}
+
 MyString::MyString(const MyString &str) {
     std::cout << "Constructor - MyString(const MyString &str)" << std::endl;
     string_length = str.string_length;
@@ -56,9 +67,10 @@ MyString::MyString(const MyString &str) {
     }
 }
 
-
 MyString::~MyString() {
-    delete[] string_content;
+    if (string_content) {
+        delete[] string_content;
+    }
 }
 
 void MyString::reserve(int size) {
@@ -110,7 +122,7 @@ void MyString::println() {
     for (int i = 0; i < string_length; i++) {
         std::cout << string_content[i];
     }
-    
+
     std::cout << std::endl;
 }
 
@@ -120,6 +132,6 @@ int main() {
     MyString str2("def");
 
     std::cout << "===============" << std::endl;
-    MyString str3 = str1+str2;
+    MyString str3(str1+str2);
     str3.println();
 }
