@@ -62,6 +62,8 @@ MyString::MyString(MyString &&str) noexcept {
     string_content = str.string_content;
 
     str.string_content = nullptr;
+    str.string_length = 0;
+    str.memory_capacity = 0;
 }
 
 
@@ -74,7 +76,7 @@ MyString &MyString::operator=(const MyString& s) {
     }
 
     string_length = s.string_length;
-    for (int i = 0; i < string_length; i++) {
+    for (int i = 0; i != string_length; i++) {
         string_content[i] = s.string_content[i];
     }
 
@@ -101,9 +103,9 @@ void MyString::println() {
 
 template <typename T>
 void my_swap(T &a, T &b) {
-    T tmp(a);
-    a = b;
-    b = tmp;
+    T tmp(std::move(a));
+    a = std::move(b);
+    b = std::move(tmp);
 }
 
 int main() {
